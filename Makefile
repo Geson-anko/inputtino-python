@@ -24,3 +24,6 @@ docker-down-volume:  ## Stop docker containers with removing volumes.
 
 docker-attach: ## Attach to development container
 	docker compose exec dev bash
+
+install: ## Install this project to site-packages
+	uv sync --reinstall
