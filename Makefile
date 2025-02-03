@@ -33,3 +33,6 @@ generate-stub: install
 
 type:
 	uv run pyright src
+
+test:
+	uv run pytest
