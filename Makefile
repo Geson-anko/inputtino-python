@@ -30,3 +30,6 @@ install: ## Install this project to site-packages
 
 generate-stub: install
 	uv run pybind11-stubgen inputtino._core -o src/
+
+type:
+	uv run pyright src
