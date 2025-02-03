@@ -27,3 +27,6 @@ docker-attach: ## Attach to development container
 
 install: ## Install this project to site-packages
 	uv sync --reinstall
+
+generate-stub: install
+	uv run pybind11-stubgen inputtino._core -o src/
