@@ -36,3 +36,6 @@ type:
 
 test:
 	uv run pytest
+
+format: ## Run pre-commit hooks
+	uv run pre-commit run -a
