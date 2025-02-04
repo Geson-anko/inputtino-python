@@ -20,6 +20,6 @@ execute_process(
 
 pybind11_add_module(_core MODULE src/main.cpp)
 target_include_directories(_core PRIVATE ${PYBIND11_INCLUDES})
-target_link_libraries(_core PRIVATE inputtino::libinputtino)
+target_link_libraries(_core PUBLIC inputtino::libinputtino)
 
 install(TARGETS _core DESTINATION inputtino)
