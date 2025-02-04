@@ -36,7 +36,7 @@ type: ## Run type check
 	uv run pyright src
 
 test: ## Run tests
-	uv run pytest
+	uv run pytest -v --log-level INFO
 
 format: ## Run pre-commit hooks
 	uv run pre-commit run -a
