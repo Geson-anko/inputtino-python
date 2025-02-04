@@ -31,11 +31,13 @@ install: ## Install this project to site-packages
 generate-stub: install
 	uv run pybind11-stubgen inputtino._core -o src/
 
-type:
+type: ## Run type check
 	uv run pyright src
 
-test:
+test: ## Run tests
 	uv run pytest
 
 format: ## Run pre-commit hooks
 	uv run pre-commit run -a
+
+run: format test type ## Run all workflow.
