@@ -9,6 +9,9 @@ authors = [
 requires-python = ">=3.12"
 dependencies = []
 
+[tool.uv]
+python-preference = "only-managed"
+
 [tool.scikit-build]
 wheel.packages = ["src/inputtino"]
 minimum-version = "build-system.requires"
