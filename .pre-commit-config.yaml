@@ -116,6 +116,9 @@ repos:
       - id: clang-format
         args: [--style=Google]
       - id: clang-tidy
+        entry: bash -c 'clang-tidy "$@" -- $(pybind11-config --includes)' --
+        args: [--use-color, --extra-arg=-Wno-error=unused-command-line-argument]
       - id: cppcheck
       - id: cpplint
       - id: include-what-you-use
+        entry: bash -c 'include-what-you-use $(pybind11-config --includes) "$@"' --
