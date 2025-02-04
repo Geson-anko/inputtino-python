@@ -1,11 +1,13 @@
 """Tests for mouse.py."""
 
+import time
 from unittest.mock import MagicMock, patch
 
 import pytest
 
 from inputtino._core import Mouse as CoreMouse
 from inputtino.mouse import DeviceDefinition, Mouse, MouseButton
+from tests.helpers import mark_practical
 
 
 @pytest.fixture
@@ -121,3 +123,52 @@ def test_mouse_creation_failure():
 
         with pytest.raises(RuntimeError, match="Failed to create mouse device"):
             Mouse()
+
+
+@mark_practical
+def test_practical_mouse_draw_square():
+    """Test drawing a square pattern with the mouse.
+
+    This practical test demonstrates drawing a square pattern by:
+    1. Moving the mouse in a square pattern
+    2. Holding left button during the movement
+    3. Creating a visible mouse movement pattern
+
+    Note:
+        This test requires actual device access (/dev/uinput)
+        and may fail if run without proper permissions.
+    """
+    mouse = Mouse()
+
+    # Ensure we have valid device nodes
+    assert len(mouse.nodes) > 0, "No mouse device nodes created"
+
+    # Give system time to register the device
+    time.sleep(0.1)
+
+    # Start at center
+    center_x, center_y = 960, 540  # Assuming 1920x1080 screen
+    square_size = 200
+
+    mouse.move_abs(center_x - square_size // 2, center_y - square_size // 2, 1920, 1080)
+    mouse.press(MouseButton.LEFT)
+
+    try:
+        # Draw square pattern
+        movements = [
+            (square_size, 0),  # Right
+            (0, square_size),  # Down
+            (-square_size, 0),  # Left
+            (0, -square_size),  # Up
+        ]
+
+        for dx, dy in movements:
+            # Move slowly to create visible pattern
+            steps = 10
+            for _ in range(steps):
+                mouse.move(dx // steps, dy // steps)
+                time.sleep(0.01)  # Small delay for smooth movement
+
+    finally:
+        # Ensure we always release the button
+        mouse.release(MouseButton.LEFT)
