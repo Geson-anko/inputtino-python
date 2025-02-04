@@ -24,9 +24,25 @@ PYBIND11_MODULE(_core, m) {
   py::class_<inputtino::VirtualDevice>(m, "VirtualDevice")
       .def("get_nodes", &inputtino::VirtualDevice::get_nodes);
 
+  // Mouse Button Enum
+  py::enum_<inputtino::Mouse::MOUSE_BUTTON>(m, "MouseButton")
+      .value("LEFT", inputtino::Mouse::MOUSE_BUTTON::LEFT)
+      .value("MIDDLE", inputtino::Mouse::MOUSE_BUTTON::MIDDLE)
+      .value("RIGHT", inputtino::Mouse::MOUSE_BUTTON::RIGHT)
+      .value("SIDE", inputtino::Mouse::MOUSE_BUTTON::SIDE)
+      .value("EXTRA", inputtino::Mouse::MOUSE_BUTTON::EXTRA)
+      .export_values();
+
   // Mouse
   py::class_<inputtino::Mouse, inputtino::VirtualDevice>(m, "Mouse")
-      .def_static("create", &inputtino::Mouse::create)
+      .def_static("create",
+                  [](const inputtino::DeviceDefinition& dev) {
+                    auto result = inputtino::Mouse::create(dev);
+                    if (!result) {
+                      throw std::runtime_error(result.getErrorMessage());
+                    }
+                    return std::move(*result);
+                  })
       .def("move", &inputtino::Mouse::move)
       .def("move_abs", &inputtino::Mouse::move_abs)
       .def("press", &inputtino::Mouse::press)
@@ -34,32 +50,36 @@ PYBIND11_MODULE(_core, m) {
       .def("vertical_scroll", &inputtino::Mouse::vertical_scroll)
       .def("horizontal_scroll", &inputtino::Mouse::horizontal_scroll);
 
-  py::enum_<inputtino::Mouse::MOUSE_BUTTON>(m, "MouseButton")
-      .value("LEFT", inputtino::Mouse::MOUSE_BUTTON::LEFT)
-      .value("MIDDLE", inputtino::Mouse::MOUSE_BUTTON::MIDDLE)
-      .value("RIGHT", inputtino::Mouse::MOUSE_BUTTON::RIGHT)
-      .value("SIDE", inputtino::Mouse::MOUSE_BUTTON::SIDE)
-      .value("EXTRA", inputtino::Mouse::MOUSE_BUTTON::EXTRA);
-
   // Keyboard
   py::class_<inputtino::Keyboard, inputtino::VirtualDevice>(m, "Keyboard")
-      .def_static("create", &inputtino::Keyboard::create)
+      .def_static("create",
+                  [](const inputtino::DeviceDefinition& dev,
+                     int millis_repress_key = 50) {
+                    auto result =
+                        inputtino::Keyboard::create(dev, millis_repress_key);
+                    if (!result) {
+                      throw std::runtime_error(result.getErrorMessage());
+                    }
+                    return std::move(*result);
+                  })
       .def("press", &inputtino::Keyboard::press)
       .def("release", &inputtino::Keyboard::release);
 
   // Trackpad
   py::class_<inputtino::Trackpad, inputtino::VirtualDevice>(m, "Trackpad")
-      .def_static("create", &inputtino::Trackpad::create)
+      .def_static("create",
+                  [](const inputtino::DeviceDefinition& dev) {
+                    auto result = inputtino::Trackpad::create(dev);
+                    if (!result) {
+                      throw std::runtime_error(result.getErrorMessage());
+                    }
+                    return std::move(*result);
+                  })
       .def("place_finger", &inputtino::Trackpad::place_finger)
       .def("release_finger", &inputtino::Trackpad::release_finger)
       .def("set_left_btn", &inputtino::Trackpad::set_left_btn);
 
-  // Joypad base class
-  py::class_<inputtino::Joypad, inputtino::VirtualDevice>(m, "Joypad")
-      .def("set_pressed_buttons", &inputtino::Joypad::set_pressed_buttons)
-      .def("set_triggers", &inputtino::Joypad::set_triggers)
-      .def("set_stick", &inputtino::Joypad::set_stick);
-
+  // Joypad Enums
   py::enum_<inputtino::Joypad::CONTROLLER_BTN>(m, "ControllerButton")
       .value("DPAD_UP", inputtino::Joypad::CONTROLLER_BTN::DPAD_UP)
       .value("DPAD_DOWN", inputtino::Joypad::CONTROLLER_BTN::DPAD_DOWN)
@@ -75,27 +95,25 @@ PYBIND11_MODULE(_core, m) {
       .value("A", inputtino::Joypad::CONTROLLER_BTN::A)
       .value("B", inputtino::Joypad::CONTROLLER_BTN::B)
       .value("X", inputtino::Joypad::CONTROLLER_BTN::X)
-      .value("Y", inputtino::Joypad::CONTROLLER_BTN::Y);
+      .value("Y", inputtino::Joypad::CONTROLLER_BTN::Y)
+      .export_values();
 
   py::enum_<inputtino::Joypad::STICK_POSITION>(m, "StickPosition")
       .value("RS", inputtino::Joypad::STICK_POSITION::RS)
-      .value("LS", inputtino::Joypad::STICK_POSITION::LS);
+      .value("LS", inputtino::Joypad::STICK_POSITION::LS)
+      .export_values();
 
-  // PS5 Joypad
-  py::class_<inputtino::PS5Joypad, inputtino::Joypad>(m, "PS5Joypad")
-      .def_static("create", &inputtino::PS5Joypad::create)
-      .def("get_mac_address", &inputtino::PS5Joypad::get_mac_address)
-      .def("get_sys_nodes", &inputtino::PS5Joypad::get_sys_nodes)
-      .def("place_finger", &inputtino::PS5Joypad::place_finger)
-      .def("release_finger", &inputtino::PS5Joypad::release_finger)
-      .def("set_motion", &inputtino::PS5Joypad::set_motion)
-      .def("set_battery", &inputtino::PS5Joypad::set_battery)
-      .def("set_on_rumble", &inputtino::PS5Joypad::set_on_rumble)
-      .def("set_on_led", &inputtino::PS5Joypad::set_on_led);
+  // Joypad base class
+  py::class_<inputtino::Joypad, inputtino::VirtualDevice>(m, "Joypad")
+      .def("set_pressed_buttons", &inputtino::Joypad::set_pressed_buttons)
+      .def("set_triggers", &inputtino::Joypad::set_triggers)
+      .def("set_stick", &inputtino::Joypad::set_stick);
 
+  // PS5 Joypad Enums
   py::enum_<inputtino::PS5Joypad::MOTION_TYPE>(m, "PS5MotionType")
       .value("ACCELERATION", inputtino::PS5Joypad::MOTION_TYPE::ACCELERATION)
-      .value("GYROSCOPE", inputtino::PS5Joypad::MOTION_TYPE::GYROSCOPE);
+      .value("GYROSCOPE", inputtino::PS5Joypad::MOTION_TYPE::GYROSCOPE)
+      .export_values();
 
   py::enum_<inputtino::PS5Joypad::BATTERY_STATE>(m, "PS5BatteryState")
       .value("BATTERY_DISCHARGING",
@@ -109,5 +127,25 @@ PYBIND11_MODULE(_core, m) {
       .value("TEMPERATURE_ERROR",
              inputtino::PS5Joypad::BATTERY_STATE::TEMPERATURE_ERROR)
       .value("CHARGING_ERROR",
-             inputtino::PS5Joypad::BATTERY_STATE::CHARGHING_ERROR);
+             inputtino::PS5Joypad::BATTERY_STATE::CHARGHING_ERROR)
+      .export_values();
+
+  // PS5 Joypad
+  py::class_<inputtino::PS5Joypad, inputtino::Joypad>(m, "PS5Joypad")
+      .def_static("create",
+                  [](const inputtino::DeviceDefinition& dev) {
+                    auto result = inputtino::PS5Joypad::create(dev);
+                    if (!result) {
+                      throw std::runtime_error(result.getErrorMessage());
+                    }
+                    return std::move(*result);
+                  })
+      .def("get_mac_address", &inputtino::PS5Joypad::get_mac_address)
+      .def("get_sys_nodes", &inputtino::PS5Joypad::get_sys_nodes)
+      .def("place_finger", &inputtino::PS5Joypad::place_finger)
+      .def("release_finger", &inputtino::PS5Joypad::release_finger)
+      .def("set_motion", &inputtino::PS5Joypad::set_motion)
+      .def("set_battery", &inputtino::PS5Joypad::set_battery)
+      .def("set_on_rumble", &inputtino::PS5Joypad::set_on_rumble)
+      .def("set_on_led", &inputtino::PS5Joypad::set_on_led);
 }

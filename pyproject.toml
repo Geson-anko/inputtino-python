@@ -36,6 +36,7 @@ pythonVersion = "3.12"
 exclude = [
   "**/node_modules",
   "**/__pycache__",
+  "./src/inputtino/_core.pyi",
 ]
 strict = ["./src/"]
 reportMissingModuleSource = "none"
