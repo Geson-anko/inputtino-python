@@ -36,7 +36,10 @@ type: ## Run type check
 	uv run pyright src
 
 test: ## Run tests
-	uv run pytest -v --log-level INFO --cov
+	uv run pytest -v --log-level INFO --cov -m "not practical"
+
+test-full: ## Run full test
+	uv run pytest -v --cov
 
 format: ## Run pre-commit hooks
 	uv run pre-commit run -a
