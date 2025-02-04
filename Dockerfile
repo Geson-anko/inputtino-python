@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     cpplint \
     cppcheck \
     iwyu \
+    libevdev-dev \
     make \
     git \
     && rm -rf /var/lib/apt/lists/* \
