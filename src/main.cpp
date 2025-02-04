@@ -1,3 +1,4 @@
+// Copyright 2025 Geson-anko
 #include <pybind11/pybind11.h>
 
 std::string hello_from_bin() { return "Hello from inputtino-python!"; }
