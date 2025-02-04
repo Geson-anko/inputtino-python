@@ -30,6 +30,7 @@ install: ## Install this project to site-packages
 
 generate-stub: install
 	uv run pybind11-stubgen inputtino._core -o src/
+	@sed -i 's/def _pybind11_conduit_v1_(\*args, \*\*kwargs):/def _pybind11_conduit_v1_(*args: typing.Any, **kwargs: typing.Any) -> typing.Any:/' src/inputtino/_core.pyi
 
 type: ## Run type check
 	uv run pyright src
