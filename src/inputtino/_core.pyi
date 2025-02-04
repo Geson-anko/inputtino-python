@@ -3,6 +3,7 @@ pybind inputtino module!
 """
 
 from __future__ import annotations
+
 import typing
 
 __all__ = [
