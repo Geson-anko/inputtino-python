@@ -2,6 +2,7 @@
 name = "inputtino-python"
 version = "0.1.0"
 description = "Add your description here"
+license-files = ["LICENSE"]
 readme = "README.md"
 authors = [
     { name = "Geson-anko", email = "59220704+Geson-anko@users.noreply.github.com" }
