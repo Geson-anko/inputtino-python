@@ -7,48 +7,18 @@ from __future__ import annotations
 import typing
 
 __all__ = [
-    "A",
-    "ACCELERATION",
-    "B",
-    "BACK",
-    "BATTERY_CHARGING",
-    "BATTERY_DISCHARGING",
-    "BATTERY_FULL",
-    "CHARGING_ERROR",
     "ControllerButton",
-    "DPAD_DOWN",
-    "DPAD_LEFT",
-    "DPAD_RIGHT",
-    "DPAD_UP",
     "DeviceDefinition",
-    "EXTRA",
-    "GYROSCOPE",
-    "HOME",
     "Joypad",
     "Keyboard",
-    "LEFT",
-    "LEFT_BUTTON",
-    "LEFT_STICK",
-    "LS",
-    "MIDDLE",
     "Mouse",
     "MouseButton",
     "PS5BatteryState",
     "PS5Joypad",
     "PS5MotionType",
-    "RIGHT",
-    "RIGHT_BUTTON",
-    "RIGHT_STICK",
-    "RS",
-    "SIDE",
-    "START",
     "StickPosition",
-    "TEMPERATURE_ERROR",
     "Trackpad",
-    "VOLTAGE_OR_TEMPERATURE_OUT_OF_RANGE",
     "VirtualDevice",
-    "X",
-    "Y",
 ]
 
 class ControllerButton:
@@ -387,36 +357,3 @@ class VirtualDevice:
         *args: typing.Any, **kwargs: typing.Any
     ) -> typing.Any: ...
     def get_nodes(self) -> list[str]: ...
-
-A: ControllerButton  # value = <ControllerButton.A: 4096>
-ACCELERATION: PS5MotionType  # value = <PS5MotionType.ACCELERATION: 1>
-B: ControllerButton  # value = <ControllerButton.B: 8192>
-BACK: ControllerButton  # value = <ControllerButton.BACK: 32>
-BATTERY_CHARGING: PS5BatteryState  # value = <PS5BatteryState.BATTERY_CHARGING: 1>
-BATTERY_DISCHARGING: PS5BatteryState  # value = <PS5BatteryState.BATTERY_DISCHARGING: 0>
-BATTERY_FULL: PS5BatteryState  # value = <PS5BatteryState.BATTERY_FULL: 2>
-CHARGING_ERROR: PS5BatteryState  # value = <PS5BatteryState.CHARGING_ERROR: 15>
-DPAD_DOWN: ControllerButton  # value = <ControllerButton.DPAD_DOWN: 2>
-DPAD_LEFT: ControllerButton  # value = <ControllerButton.DPAD_LEFT: 4>
-DPAD_RIGHT: ControllerButton  # value = <ControllerButton.DPAD_RIGHT: 8>
-DPAD_UP: ControllerButton  # value = <ControllerButton.DPAD_UP: 1>
-EXTRA: MouseButton  # value = <MouseButton.EXTRA: 4>
-GYROSCOPE: PS5MotionType  # value = <PS5MotionType.GYROSCOPE: 2>
-HOME: ControllerButton  # value = <ControllerButton.HOME: 1024>
-LEFT: MouseButton  # value = <MouseButton.LEFT: 0>
-LEFT_BUTTON: ControllerButton  # value = <ControllerButton.LEFT_BUTTON: 256>
-LEFT_STICK: ControllerButton  # value = <ControllerButton.LEFT_STICK: 64>
-LS: StickPosition  # value = <StickPosition.LS: 1>
-MIDDLE: MouseButton  # value = <MouseButton.MIDDLE: 1>
-RIGHT: MouseButton  # value = <MouseButton.RIGHT: 2>
-RIGHT_BUTTON: ControllerButton  # value = <ControllerButton.RIGHT_BUTTON: 512>
-RIGHT_STICK: ControllerButton  # value = <ControllerButton.RIGHT_STICK: 128>
-RS: StickPosition  # value = <StickPosition.RS: 0>
-SIDE: MouseButton  # value = <MouseButton.SIDE: 3>
-START: ControllerButton  # value = <ControllerButton.START: 16>
-TEMPERATURE_ERROR: PS5BatteryState  # value = <PS5BatteryState.TEMPERATURE_ERROR: 11>
-VOLTAGE_OR_TEMPERATURE_OUT_OF_RANGE: (
-    PS5BatteryState  # value = <PS5BatteryState.VOLTAGE_OR_TEMPERATURE_OUT_OF_RANGE: 10>
-)
-X: ControllerButton  # value = <ControllerButton.X: 16384>
-Y: ControllerButton  # value = <ControllerButton.Y: 32768>

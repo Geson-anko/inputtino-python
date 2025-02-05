@@ -30,8 +30,7 @@ PYBIND11_MODULE(_core, m) {
       .value("MIDDLE", inputtino::Mouse::MOUSE_BUTTON::MIDDLE)
       .value("RIGHT", inputtino::Mouse::MOUSE_BUTTON::RIGHT)
       .value("SIDE", inputtino::Mouse::MOUSE_BUTTON::SIDE)
-      .value("EXTRA", inputtino::Mouse::MOUSE_BUTTON::EXTRA)
-      .export_values();
+      .value("EXTRA", inputtino::Mouse::MOUSE_BUTTON::EXTRA);
 
   // Mouse
   py::class_<inputtino::Mouse, inputtino::VirtualDevice>(m, "Mouse")
@@ -95,13 +94,11 @@ PYBIND11_MODULE(_core, m) {
       .value("A", inputtino::Joypad::CONTROLLER_BTN::A)
       .value("B", inputtino::Joypad::CONTROLLER_BTN::B)
       .value("X", inputtino::Joypad::CONTROLLER_BTN::X)
-      .value("Y", inputtino::Joypad::CONTROLLER_BTN::Y)
-      .export_values();
+      .value("Y", inputtino::Joypad::CONTROLLER_BTN::Y);
 
   py::enum_<inputtino::Joypad::STICK_POSITION>(m, "StickPosition")
       .value("RS", inputtino::Joypad::STICK_POSITION::RS)
-      .value("LS", inputtino::Joypad::STICK_POSITION::LS)
-      .export_values();
+      .value("LS", inputtino::Joypad::STICK_POSITION::LS);
 
   // Joypad base class
   py::class_<inputtino::Joypad, inputtino::VirtualDevice>(m, "Joypad")
@@ -112,8 +109,7 @@ PYBIND11_MODULE(_core, m) {
   // PS5 Joypad Enums
   py::enum_<inputtino::PS5Joypad::MOTION_TYPE>(m, "PS5MotionType")
       .value("ACCELERATION", inputtino::PS5Joypad::MOTION_TYPE::ACCELERATION)
-      .value("GYROSCOPE", inputtino::PS5Joypad::MOTION_TYPE::GYROSCOPE)
-      .export_values();
+      .value("GYROSCOPE", inputtino::PS5Joypad::MOTION_TYPE::GYROSCOPE);
 
   py::enum_<inputtino::PS5Joypad::BATTERY_STATE>(m, "PS5BatteryState")
       .value("BATTERY_DISCHARGING",
@@ -127,8 +123,7 @@ PYBIND11_MODULE(_core, m) {
       .value("TEMPERATURE_ERROR",
              inputtino::PS5Joypad::BATTERY_STATE::TEMPERATURE_ERROR)
       .value("CHARGING_ERROR",
-             inputtino::PS5Joypad::BATTERY_STATE::CHARGHING_ERROR)
-      .export_values();
+             inputtino::PS5Joypad::BATTERY_STATE::CHARGHING_ERROR);
 
   // PS5 Joypad
   py::class_<inputtino::PS5Joypad, inputtino::Joypad>(m, "PS5Joypad")
