@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Self
 
 from . import _core
 
@@ -40,22 +39,3 @@ class DeviceDefinition:
         definition.device_phys = self.device_phys
         definition.device_uniq = self.device_uniq
         return definition
-
-    @classmethod
-    def from_core(cls, core_definition: _core.DeviceDefinition) -> Self:
-        """Create a DeviceDefinition from a C++ DeviceDefinition object.
-
-        Args:
-            core_definition: C++ DeviceDefinition object
-
-        Returns:
-            A new DeviceDefinition instance
-        """
-        return cls(
-            name=core_definition.name,
-            vendor_id=core_definition.vendor_id,
-            product_id=core_definition.product_id,
-            version=core_definition.version,
-            device_phys=core_definition.device_phys,
-            device_uniq=core_definition.device_uniq,
-        )

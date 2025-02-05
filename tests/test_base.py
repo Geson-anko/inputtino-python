@@ -37,23 +37,3 @@ def test_device_definition_to_core():
     assert core_def.version == definition.version
     assert core_def.device_phys == definition.device_phys
     assert core_def.device_uniq == definition.device_uniq
-
-
-def test_device_definition_from_core():
-    core_def = _core.DeviceDefinition()
-    core_def.name = "Test Device"
-    core_def.vendor_id = 0x1234
-    core_def.product_id = 0x5678
-    core_def.version = 1
-    core_def.device_phys = "/dev/input/test"
-    core_def.device_uniq = "unique_id"
-
-    definition = DeviceDefinition.from_core(core_def)
-
-    assert isinstance(definition, DeviceDefinition)
-    assert definition.name == core_def.name
-    assert definition.vendor_id == core_def.vendor_id
-    assert definition.product_id == core_def.product_id
-    assert definition.version == core_def.version
-    assert definition.device_phys == core_def.device_phys
-    assert definition.device_uniq == core_def.device_uniq
