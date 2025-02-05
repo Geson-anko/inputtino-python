@@ -23,13 +23,6 @@ class Keyboard:
     The device appears as a real keyboard input device to the system.
     Key codes used are Win32 Virtual Key (VK) codes.
 
-    Args:
-        device_def: Optional device definition for customizing the virtual device properties
-        millis_repress_key: Time in milliseconds between key press repeats (default: 50)
-
-    Raises:
-        RuntimeError: If device creation fails
-
     Example:
         >>> from inputtino.keyboard import Keyboard, KeyCode
         >>> kb = Keyboard()
@@ -45,7 +38,15 @@ class Keyboard:
         millis_repress_key: int = 50,
     ) -> None:
         """Initialize the keyboard device with optional custom device
-        definition."""
+        definition.
+
+        Args:
+            device_def: Optional device definition for customizing the virtual device properties
+            millis_repress_key: Time in milliseconds between key press repeats (default: 50)
+
+        Raises:
+            RuntimeError: If device creation fails
+        """
         self._keyboard = _core.Keyboard.create(device_def.to_core(), millis_repress_key)
 
     def press(self, key_code: int) -> None:

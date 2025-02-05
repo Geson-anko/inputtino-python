@@ -15,19 +15,21 @@ DEFAULT_TOUCHSCREEN = DeviceDefinition(
 class TouchScreen:
     """Virtual touchscreen input device.
 
-    This class provides functionality to simulate touchscreen interactions.
-    The device appears as a real touchscreen input device to the system.
-
-    Args:
-        device_def: Optional device definition for customizing the virtual device properties
-
-    Raises:
-        RuntimeError: If device creation fails
+    This class provides functionality to simulate touchscreen
+    interactions. The device appears as a real touchscreen input device
+    to the system.
     """
 
     def __init__(self, device_def: DeviceDefinition = DEFAULT_TOUCHSCREEN) -> None:
         """Initialize the touchscreen device with optional custom device
-        definition."""
+        definition.
+
+        Args:
+            device_def: Optional device definition for customizing the virtual device properties
+
+        Raises:
+            RuntimeError: If device creation fails
+        """
         self._touchscreen = _core.TouchScreen.create(device_def.to_core())
 
     def place_finger(

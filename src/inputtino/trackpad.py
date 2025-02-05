@@ -14,21 +14,24 @@ DEFAULT_TRACKPAD = DeviceDefinition(
 class Trackpad:
     """Virtual trackpad input device.
 
-    This class provides functionality to simulate multi-touch trackpad interactions.
-    The device appears as a real touchpad input device to the system.
+    This class provides functionality to simulate multi-touch trackpad
+    interactions. The device appears as a real touchpad input device to
+    the system.
 
+    implements a pure multi-touch touchpad as defined in libinput
     https://wayland.freedesktop.org/libinput/doc/latest/touchpads.html
-
-    Args:
-        device_def: Optional device definition for customizing the virtual device properties
-
-    Raises:
-        RuntimeError: If device creation fails
     """
 
     def __init__(self, device_def: DeviceDefinition = DEFAULT_TRACKPAD) -> None:
         """Initialize the trackpad device with optional custom device
-        definition."""
+        definition.
+
+        Args:
+            device_def: Optional device definition for customizing the virtual device properties
+
+        Raises:
+            RuntimeError: If device creation fails
+        """
         self._trackpad = _core.Trackpad.create(device_def.to_core())
 
     def place_finger(

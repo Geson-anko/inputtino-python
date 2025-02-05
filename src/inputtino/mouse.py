@@ -16,19 +16,20 @@ DEFAULT_MOUSE = DeviceDefinition(
 class Mouse:
     """Virtual mouse input device.
 
-    This class provides functionality to simulate mouse movements, clicks, and scrolling.
-    The device appears as a real mouse input device to the system.
-
-    Args:
-        device_def: Optional device definition for customizing the virtual device properties
-
-    Raises:
-        RuntimeError: If device creation fails
+    This class provides functionality to simulate mouse movements,
+    clicks, and scrolling. The device appears as a real mouse input
+    device to the system.
     """
 
     def __init__(self, device_def: DeviceDefinition = DEFAULT_MOUSE) -> None:
-        """Initialize the mouse device with optional custom device
-        definition."""
+        """Initialize the mouse device with optional custom device definition.
+
+        Args:
+            device_def: Optional device definition for customizing the virtual device properties
+
+        Raises:
+            RuntimeError: If device creation fails
+        """
         self._mouse = _core.Mouse.create(device_def.to_core())
 
     def move(self, delta_x: int, delta_y: int) -> None:
