@@ -91,6 +91,13 @@ PYBIND11_MODULE(_core, m) {
       .value("RIGHT_STICK", inputtino::Joypad::CONTROLLER_BTN::RIGHT_STICK)
       .value("LEFT_BUTTON", inputtino::Joypad::CONTROLLER_BTN::LEFT_BUTTON)
       .value("RIGHT_BUTTON", inputtino::Joypad::CONTROLLER_BTN::RIGHT_BUTTON)
+      .value("SPECIAL_FLAG", inputtino::Joypad::CONTROLLER_BTN::SPECIAL_FLAG)
+      .value("PADDLE1_FLAG", inputtino::Joypad::CONTROLLER_BTN::PADDLE1_FLAG)
+      .value("PADDLE2_FLAG", inputtino::Joypad::CONTROLLER_BTN::PADDLE2_FLAG)
+      .value("PADDLE3_FLAG", inputtino::Joypad::CONTROLLER_BTN::PADDLE3_FLAG)
+      .value("PADDLE4_FLAG", inputtino::Joypad::CONTROLLER_BTN::PADDLE4_FLAG)
+      .value("TOUCHPAD_FLAG", inputtino::Joypad::CONTROLLER_BTN::TOUCHPAD_FLAG)
+      .value("MISC_FLAG", inputtino::Joypad::CONTROLLER_BTN::MISC_FLAG)
       .value("A", inputtino::Joypad::CONTROLLER_BTN::A)
       .value("B", inputtino::Joypad::CONTROLLER_BTN::B)
       .value("X", inputtino::Joypad::CONTROLLER_BTN::X)
@@ -105,6 +112,30 @@ PYBIND11_MODULE(_core, m) {
       .def("set_pressed_buttons", &inputtino::Joypad::set_pressed_buttons)
       .def("set_triggers", &inputtino::Joypad::set_triggers)
       .def("set_stick", &inputtino::Joypad::set_stick);
+
+  // XboxOneJoypad
+  py::class_<inputtino::XboxOneJoypad, inputtino::Joypad>(m, "XboxOneJoypad")
+      .def_static("create",
+                  [](const inputtino::DeviceDefinition& dev) {
+                    auto result = inputtino::XboxOneJoypad::create(dev);
+                    if (!result) {
+                      throw std::runtime_error(result.getErrorMessage());
+                    }
+                    return std::move(*result);
+                  })
+      .def("set_on_rumble", &inputtino::XboxOneJoypad::set_on_rumble);
+
+  // SwitchJoypad
+  py::class_<inputtino::SwitchJoypad, inputtino::Joypad>(m, "SwitchJoypad")
+      .def_static("create",
+                  [](const inputtino::DeviceDefinition& dev) {
+                    auto result = inputtino::SwitchJoypad::create(dev);
+                    if (!result) {
+                      throw std::runtime_error(result.getErrorMessage());
+                    }
+                    return std::move(*result);
+                  })
+      .def("set_on_rumble", &inputtino::SwitchJoypad::set_on_rumble);
 
   // PS5 Joypad Enums
   py::enum_<inputtino::PS5Joypad::MOTION_TYPE>(m, "PS5MotionType")
@@ -143,4 +174,45 @@ PYBIND11_MODULE(_core, m) {
       .def("set_battery", &inputtino::PS5Joypad::set_battery)
       .def("set_on_rumble", &inputtino::PS5Joypad::set_on_rumble)
       .def("set_on_led", &inputtino::PS5Joypad::set_on_led);
+
+  // TouchScreen
+  py::class_<inputtino::TouchScreen, inputtino::VirtualDevice>(m, "TouchScreen")
+      .def_static("create",
+                  [](const inputtino::DeviceDefinition& dev) {
+                    auto result = inputtino::TouchScreen::create(dev);
+                    if (!result) {
+                      throw std::runtime_error(result.getErrorMessage());
+                    }
+                    return std::move(*result);
+                  })
+      .def("place_finger", &inputtino::TouchScreen::place_finger)
+      .def("release_finger", &inputtino::TouchScreen::release_finger);
+
+  // PenTablet tool and button enums
+  py::enum_<inputtino::PenTablet::TOOL_TYPE>(m, "PenToolType")
+      .value("PEN", inputtino::PenTablet::TOOL_TYPE::PEN)
+      .value("ERASER", inputtino::PenTablet::TOOL_TYPE::ERASER)
+      .value("BRUSH", inputtino::PenTablet::TOOL_TYPE::BRUSH)
+      .value("PENCIL", inputtino::PenTablet::TOOL_TYPE::PENCIL)
+      .value("AIRBRUSH", inputtino::PenTablet::TOOL_TYPE::AIRBRUSH)
+      .value("TOUCH", inputtino::PenTablet::TOOL_TYPE::TOUCH)
+      .value("SAME_AS_BEFORE", inputtino::PenTablet::TOOL_TYPE::SAME_AS_BEFORE);
+
+  py::enum_<inputtino::PenTablet::BTN_TYPE>(m, "PenButtonType")
+      .value("PRIMARY", inputtino::PenTablet::BTN_TYPE::PRIMARY)
+      .value("SECONDARY", inputtino::PenTablet::BTN_TYPE::SECONDARY)
+      .value("TERTIARY", inputtino::PenTablet::BTN_TYPE::TERTIARY);
+
+  // PenTablet
+  py::class_<inputtino::PenTablet, inputtino::VirtualDevice>(m, "PenTablet")
+      .def_static("create",
+                  [](const inputtino::DeviceDefinition& dev) {
+                    auto result = inputtino::PenTablet::create(dev);
+                    if (!result) {
+                      throw std::runtime_error(result.getErrorMessage());
+                    }
+                    return std::move(*result);
+                  })
+      .def("place_tool", &inputtino::PenTablet::place_tool)
+      .def("set_btn", &inputtino::PenTablet::set_btn);
 }
