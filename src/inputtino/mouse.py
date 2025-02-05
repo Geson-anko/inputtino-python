@@ -106,7 +106,9 @@ class Mouse:
             button: The button to click
             duration: How long to hold the button down in seconds
         """
-        self.press(button)
-        if duration > 0:
-            time.sleep(duration)
-        self.release(button)
+        try:
+            self.press(button)
+            if duration > 0:
+                time.sleep(duration)
+        finally:
+            self.release(button)

@@ -82,10 +82,12 @@ class Keyboard:
             key_code: Win32 Virtual Key code of the key
             duration: Time in seconds to hold the key (default: 0.1)
         """
-        self.press(key_code)
-        if duration > 0:
-            time.sleep(duration)
-        self.release(key_code)
+        try:
+            self.press(key_code)
+            if duration > 0:
+                time.sleep(duration)
+        finally:
+            self.release(key_code)
 
 
 class KeyCode(IntEnum):
