@@ -1,5 +1,7 @@
 """Mouse input device implementation."""
 
+import time
+
 from . import _core
 from ._core import MouseButton
 from .base import DeviceDefinition
@@ -94,3 +96,17 @@ class Mouse:
             List of device node paths
         """
         return self._mouse.get_nodes()
+
+    def click(
+        self, button: MouseButton = MouseButton.LEFT, duration: float = 0.0
+    ) -> None:
+        """Perform a mouse click by pressing and releasing a button.
+
+        Args:
+            button: The button to click
+            duration: How long to hold the button down in seconds
+        """
+        self.press(button)
+        if duration > 0:
+            time.sleep(duration)
+        self.release(button)

@@ -114,6 +114,17 @@ def test_mouse_nodes(mock_core_mouse):
     mock_core_mouse.get_nodes.assert_called_once()
 
 
+def test_click(mock_core_mouse):
+    """Test single click functionality."""
+    mouse = Mouse()
+    with patch("time.sleep") as mock_sleep:
+        mouse.click(MouseButton.LEFT, 0.5)
+
+        mock_core_mouse.press.assert_called_once_with(MouseButton.LEFT)
+        mock_sleep.assert_called_once_with(0.5)
+        mock_core_mouse.release.assert_called_once_with(MouseButton.LEFT)
+
+
 def test_mouse_creation_failure():
     """Test handling of mouse creation failure."""
     with patch("inputtino._core.Mouse") as mock_mouse_cls:
