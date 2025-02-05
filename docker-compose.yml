@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - /dev/input:/dev/input:rw
+      - /dev/uhid:/dev/uhid
       - inputtino-python:/workspace
       - uv_cache:/root/.cache/uv
       - pip_cache:/root/.cache/pip
@@ -15,6 +16,7 @@ services:
     stdin_open: true
     command: /bin/bash
     working_dir: /workspace
+    privileged: true
 
 volumes:
   inputtino-python:
