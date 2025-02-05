@@ -1,5 +1,5 @@
 [![Link & Format / Test / Type Check](https://github.com/Geson-anko/inputtino-python/actions/workflows/main.yml/badge.svg)](https://github.com/Geson-anko/inputtino-python/actions/workflows/main.yml)
-[![Python 3.10+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # inputtino-python
