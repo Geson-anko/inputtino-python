@@ -89,21 +89,25 @@ class Joypad:
         self._joypad.set_stick(stick, x, y)
 
 
+DEFAULT_XBOX_ONE_JOYPAD_DEF = DeviceDefinition(
+    name="Wolf X-Box One (virtual) pad",
+    vendor_id=0x045E,
+    product_id=0x02EA,
+    version=0x0408,
+)
+
+
 class XBoxOneJoypad(Joypad):
     """Xbox One controller implementation."""
 
-    def __init__(self, device_def: DeviceDefinition | None = None) -> None:
+    def __init__(
+        self, device_def: DeviceDefinition = DEFAULT_XBOX_ONE_JOYPAD_DEF
+    ) -> None:
         """Initialize Xbox One controller.
 
         Args:
-            device_def: Optional device definition. Uses default if None
+            device_def: Optional device definition.
         """
-        device_def = device_def or DeviceDefinition(
-            name="Wolf X-Box One (virtual) pad",
-            vendor_id=0x045E,
-            product_id=0x02EA,
-            version=0x0408,
-        )
         joypad = _core.XboxOneJoypad.create(device_def.to_core())
         super().__init__(device_def, joypad)
         self._xbox_joypad = joypad
@@ -118,21 +122,25 @@ class XBoxOneJoypad(Joypad):
         self._xbox_joypad.set_on_rumble(callback)
 
 
+DEFAULT_SWITCH_JOYPAD_DEF = DeviceDefinition(
+    name="Wolf Nintendo (virtual) pad",
+    vendor_id=0x057E,
+    product_id=0x2009,
+    version=0x8111,
+)
+
+
 class SwitchJoypad(Joypad):
     """Nintendo Switch controller implementation."""
 
-    def __init__(self, device_def: DeviceDefinition | None = None) -> None:
+    def __init__(
+        self, device_def: DeviceDefinition = DEFAULT_SWITCH_JOYPAD_DEF
+    ) -> None:
         """Initialize Switch controller.
 
         Args:
-            device_def: Optional device definition. Uses default if None
+            device_def: Optional device definition.
         """
-        device_def = device_def or DeviceDefinition(
-            name="Wolf Nintendo (virtual) pad",
-            vendor_id=0x057E,
-            product_id=0x2009,
-            version=0x8111,
-        )
         joypad = _core.SwitchJoypad.create(device_def.to_core())
         super().__init__(device_def, joypad)
         self._switch_joypad = joypad
@@ -147,21 +155,23 @@ class SwitchJoypad(Joypad):
         self._switch_joypad.set_on_rumble(callback)
 
 
+DEFAULT_PS5_JOYPAD_DEF = DeviceDefinition(
+    name="Wolf DualSense (virtual) pad",
+    vendor_id=0x054C,
+    product_id=0x0CE6,
+    version=0x8111,
+)
+
+
 class PS5Joypad(Joypad):
     """PlayStation 5 DualSense controller implementation."""
 
-    def __init__(self, device_def: DeviceDefinition | None = None) -> None:
+    def __init__(self, device_def: DeviceDefinition = DEFAULT_PS5_JOYPAD_DEF) -> None:
         """Initialize PS5 controller.
 
         Args:
-            device_def: Optional device definition. Uses default if None
+            device_def: Optional device definition.
         """
-        device_def = device_def or DeviceDefinition(
-            name="Wolf DualSense (virtual) pad",
-            vendor_id=0x054C,
-            product_id=0x0CE6,
-            version=0x8111,
-        )
         joypad = _core.PS5Joypad.create(device_def.to_core())
         super().__init__(device_def, joypad)
         self._ps5_joypad = joypad
