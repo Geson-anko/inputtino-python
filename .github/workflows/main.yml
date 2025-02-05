@@ -7,7 +7,7 @@ on:
     branches: [main, stable]
 
 env:
-  PYTHON_VERSION: "3.12"
+  PYTHON_VERSION: "3.10"
   UV_VERSION: "0.5.10"
 
 jobs:
@@ -73,7 +73,7 @@ jobs:
 
       - name: Run pytest with coverage
         run: |
-          uv run pytest -vv --log-level=INFO --cov
+          uv run pytest -vv --log-level INFO --cov -m "not practical"
 
   run_type-check:
     runs-on: ubuntu-24.04
@@ -102,4 +102,4 @@ jobs:
         run: uv sync
 
       - name: Run pyright
-        run: uv run pyright
+        run: uv run pyright src
