@@ -94,6 +94,24 @@ def test_keyboard_nodes(mock_core_keyboard):
     mock_core_keyboard.get_nodes.assert_called_once()
 
 
+def test_keyboard_type(mock_core_keyboard):
+    """Test keyboard type method."""
+    keyboard = Keyboard()
+
+    with patch("time.sleep") as mock_sleep:
+        # Test with default duration
+        keyboard.type(KeyCode.A)
+        mock_core_keyboard.press.assert_called_with(KeyCode.A)
+        mock_sleep.assert_called_with(0.1)
+        mock_core_keyboard.release.assert_called_with(KeyCode.A)
+
+        # Test with custom duration
+        keyboard.type(KeyCode.B, 0.5)
+        mock_core_keyboard.press.assert_called_with(KeyCode.B)
+        mock_sleep.assert_called_with(0.5)
+        mock_core_keyboard.release.assert_called_with(KeyCode.B)
+
+
 def test_keyboard_creation_failure():
     """Test handling of keyboard creation failure."""
     with patch("inputtino._core.Keyboard") as mock_keyboard_cls:

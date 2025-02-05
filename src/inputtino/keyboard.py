@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import time
 from enum import IntEnum
 
 from . import _core
@@ -73,6 +74,18 @@ class Keyboard:
             List of device node paths
         """
         return self._keyboard.get_nodes()
+
+    def type(self, key_code: int, duration: float = 0.1) -> None:
+        """Press and release a key with specified duration.
+
+        Args:
+            key_code: Win32 Virtual Key code of the key
+            duration: Time in seconds to hold the key (default: 0.1)
+        """
+        self.press(key_code)
+        if duration > 0:
+            time.sleep(duration)
+        self.release(key_code)
 
 
 class KeyCode(IntEnum):
