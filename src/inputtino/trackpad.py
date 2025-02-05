@@ -17,6 +17,8 @@ class Trackpad:
     This class provides functionality to simulate multi-touch trackpad interactions.
     The device appears as a real touchpad input device to the system.
 
+    https://wayland.freedesktop.org/libinput/doc/latest/touchpads.html
+
     Args:
         device_def: Optional device definition for customizing the virtual device properties
 
