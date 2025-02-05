@@ -46,6 +46,6 @@ format: ## Run pre-commit hooks
 
 run: format test type ## Run all workflow.
 
-show-includes: ## Shows the include directories.
+includes: ## Shows the include directories.
 	@pybind11-config --includes | tr ' ' '\n' | grep -e '^-I' | sed 's/^-I//'
 	@echo ./build/**/_deps/inputtino-src/include
