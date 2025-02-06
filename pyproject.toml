@@ -49,16 +49,6 @@ wheel.packages = ["src/inputtino"]
 minimum-version = "build-system.requires"
 build-dir = "build/{wheel_tag}"
 
-[tool.cibuildwheel]
-build = ["cp310-*", "cp311-*", "cp312-*", "cp313-*"]
-skip = ["*-win32", "*-manylinux_i686"]
-test-skip = "*"
-
-[tool.cibuildwheel.linux]
-before-all = [
-    "yum update && yum install -y cmake libevdev-devel",
-]
-
 [build-system]
 requires = ["scikit-build-core>=0.10", "pybind11"]
 build-backend = "scikit_build_core.build"
