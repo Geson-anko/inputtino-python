@@ -41,7 +41,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: python-package-distributions-${{ matrix.os }}-${{ matrix.python }}
-        path: dist/
+        path: dist/*.whl
 
   publish-to-pypi:
     name: Publish Python 🐍 distribution 📦 to PyPI
