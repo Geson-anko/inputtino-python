@@ -60,7 +60,8 @@ jobs:
     - name: Download all the dists
       uses: actions/download-artifact@v4
       with:
-        path: dist/
+        pattern: python-package-distributions-*/*.whl
+        merge-multiple: true
     - name: Display structure of downloaded files
       run: ls -R dist/
     - name: Publish distribution 📦 to TestPyPI
