@@ -21,9 +21,33 @@ Python bindings for the [inputtino](https://github.com/games-on-whales/inputtino
 
 ## Installation
 
+1. Install system dependencies:
+
+**Ubuntu / Debian**:
+
 ```bash
-pip install inputtino-python
+sudo apt install git cmake build-essential pkg-config libevdev-dev
 ```
+
+**Fedora**:
+
+```sh
+sudo dnf install git cmake gcc-c++ pkgconfig libevdev-devel
+```
+
+**Arch Linux**:
+
+```sh
+sudo pacman -Sy git cmake base-devel pkgconf libevdev
+```
+
+2. Install inputtino-python:
+
+```bash
+pip install git+https://github.com/Geson-anko/inputtino-python.git#stable
+```
+
+This package requires root privileges or appropriate permissions for /dev/uinput to work properly.
 
 ## Quick Start
 
