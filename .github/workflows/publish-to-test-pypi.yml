@@ -34,15 +34,11 @@ jobs:
           CIBW_ENVIRONMENT: >
             CMAKE_ARGS="-DCMAKE_BUILD_TYPE=Release"
 
-      - name: Build SDist
-        run: pipx run build --sdist
-
       - uses: actions/upload-artifact@v4
         with:
           name: distributions
           path: |
             wheelhouse/*.whl
-            dist/*.tar.gz
 
   publish-to-testpypi:
     name: "TestPyPI: Publish Python 🐍 distribution 📦"
