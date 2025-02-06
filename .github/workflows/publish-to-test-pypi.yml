@@ -1,5 +1,4 @@
 name: "TestPyPI: Publish Python 🐍 distribution 📦"
-
 on:
   pull_request:
     branches: [stable]
@@ -17,52 +16,47 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential cmake libevdev-dev pkg-config
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.16.5
         env:
           CIBW_BUILD: "cp310-* cp311-* cp312-* cp313-*"
           CIBW_SKIP: "*-win32 *-manylinux_i686"
-          CIBW_BEFORE_BUILD: "pip install -U pip scikit-build-core pybind11"
+          CIBW_BEFORE_ALL_LINUX: >
+            apt-get update && apt-get install -y cmake libevdev-dev pkg-config
           CIBW_ENVIRONMENT: >
             CMAKE_ARGS="-DCMAKE_BUILD_TYPE=Release"
+          CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
+          CIBW_MANYLINUX_I686_IMAGE: manylinux_2_28
+
+      - name: Build SDist
+        run: pipx run build --sdist
 
       - uses: actions/upload-artifact@v4
         with:
           name: distributions
           path: |
             wheelhouse/*.whl
+            dist/*.tar.gz
 
   publish-to-testpypi:
     name: "TestPyPI: Publish Python 🐍 distribution 📦"
     needs:
       - build_wheels
     runs-on: ubuntu-latest
-
     environment:
       name: testpypi
       url: https://test.pypi.org/p/inputtino-python
-
     permissions:
-      id-token: write  # IMPORTANT: mandatory for trusted publishing
+      id-token: write
 
     steps:
-      - name: Download all the dists
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           name: distributions
           path: dist/
-
       - name: Display structure of downloaded files
         run: ls -R dist/
-
       - name: Publish distribution 📦 to TestPyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
