@@ -16,7 +16,12 @@ keywords = [
   "automation",
   "keyboard",
   "mouse",
-  "joypad","pentablet","touchscreen","linux","uinput","trackpad"
+  "joypad",
+  "pentablet",
+  "touchscreen",
+  "linux",
+  "uinput",
+  "trackpad",
 ]
 
 classifiers = [
