@@ -62,6 +62,7 @@ jobs:
       with:
         pattern: python-package-distributions-*/*.whl
         merge-multiple: true
+        path: dist/
     - name: Display structure of downloaded files
       run: ls -R dist/
     - name: Publish distribution 📦 to TestPyPI
