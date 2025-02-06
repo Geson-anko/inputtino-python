@@ -110,6 +110,35 @@ joypad.set_triggers(left=32000, right=16000)
 joypad.set_on_rumble(lambda low, high: print(f"Rumble: {low}, {high}"))
 ```
 
+## Docker Container Integration
+
+When using inputtino-python in Docker environments, add these required configurations:
+
+### Required Docker Settings
+
+```yaml
+# docker-compose.yml example
+services:
+  your-service:
+    volumes:
+      - /dev/input:/dev/input:rw  # For input device access
+      - /dev/uhid:/dev/uhid       # For PS5 controller support
+    devices:
+      - /dev/uinput              # For virtual device creation
+    privileged: true             # Required for device access
+```
+
+Or when running Docker:
+
+```bash
+docker run -it --rm \
+  -v /dev/input:/dev/input:rw \
+  -v /dev/uhid:/dev/uhid \
+  --device /dev/uinput \
+  --privileged \
+  your-image-name
+```
+
 ## Development
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
