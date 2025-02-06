@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - /dev/input:/dev/input:rw
-      - /dev/uhid:/dev/uhid
+      - /dev/uhid:/dev/uhid:rw
       - inputtino-python:/workspace
       - uv_cache:/root/.cache/uv
       - pip_cache:/root/.cache/pip
