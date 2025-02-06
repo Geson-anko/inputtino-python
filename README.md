@@ -29,12 +29,6 @@ Python bindings for the [inputtino](https://github.com/games-on-whales/inputtino
 sudo apt install git cmake build-essential pkg-config libevdev-dev
 ```
 
-**Fedora**:
-
-```sh
-sudo dnf install git cmake gcc-c++ pkgconfig libevdev-devel
-```
-
 **Arch Linux**:
 
 ```sh
