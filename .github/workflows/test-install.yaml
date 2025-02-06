@@ -17,7 +17,7 @@ jobs:
             install: >-
               apt-get update &&
               apt-get install -y build-essential cmake libevdev-dev pkg-config git python3 python3-pip &&
-              python3 -m pip install --upgrade pip --break-system-packages
+              python3 -m pip install --upgrade pip
           - image: ubuntu:24.04
             install: >-
               apt-get update &&
