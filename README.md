@@ -17,7 +17,7 @@ Python bindings for the [inputtino](https://github.com/games-on-whales/inputtino
 
 - Python 3.10 or higher
 - Linux system with uinput support
-- Root privileges or appropriate permissions for /dev/uinput
+- Root privileges or appropriate permissions for `/dev/uinput` and `/dev/uhid` (for PS5Joypad)
 
 ## Installation
 
@@ -25,7 +25,7 @@ Python bindings for the [inputtino](https://github.com/games-on-whales/inputtino
 
 **Ubuntu / Debian**:
 
-```bash
+```sh
 sudo apt install git cmake build-essential pkg-config libevdev-dev
 ```
 
