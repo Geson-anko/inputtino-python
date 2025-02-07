@@ -29,7 +29,7 @@ jobs:
               python -m pip install --upgrade pip --break-system-packages
           - image: fedora:latest
             install: >-
-              dnf install git cmake gcc gcc-c++ make pkgconf-pkg-config libevdev-devel python3-devel python3-pip &&
+              dnf install -y git cmake gcc gcc-c++ make pkgconf-pkg-config libevdev-devel python3-devel python3-pip &&
               python -m pip install --upgrade pip --break-system-packages
     container:
       image: ${{ matrix.container.image }}
