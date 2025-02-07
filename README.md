@@ -36,6 +36,13 @@ sudo apt install git cmake build-essential pkg-config libevdev-dev
 sudo pacman -Sy git cmake base-devel pkgconf libevdev
 ```
 
+**Fedora**:
+
+```sh
+sudo dnf install git cmake gcc gcc-c++ make pkgconf-pkg-config libevdev-devel
+# Optional python3-devel
+```
+
 2. Install inputtino-python:
 
 ```bash
